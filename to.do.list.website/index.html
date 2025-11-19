@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Text:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+<header>
+  <h1>To Do list</h1>
+</header>
+<div>
+<main>
+  <section class="form-section">
+    <form>
+      <input type="text" class="border rounded p-2" id="todo-input" placeholder="Enter a new list">
+      <input type="date" class="border rounded p-2" id="todo-date" placeholder="Enter your date">
+    </form>
+    <button type="button" onclick="addTodo()" class="border rounded p-2 bg-blue-500 text-white"
+    id="blue-button">add the list</button>
+  </section>
+  <section class="flex pt-2 justify-between"></section>
+  <button class="border rounded p-2 bg-red-500 text-white" id="red-button"
+  onclick="clearTodos()">clear</button>
+  <button class="border rounded p-2 bg-purple-500 text-white" id="purple-button">filter button</button>
+</section>
+</div>
+<br>
+<div class="div-list">
+<section class="pt-2">
+  <header>
+    <h1 class="text 2xl font-semibold">list</h1>
+  </header>
+  <ul class="pt-2" id="todo-list">
+    <li>no todos</li>
+  </ul>
+</section>
+</div>
+</main>
+
+<footer class="pt-5">
+  <p>&copy; 2025 Todo List Yana Apps</p>
+</footer>
+          <script>
+            let todos = [];
+
+    function addTodo(){
+      const todoInput = document.getElementById('todo-input');
+    const todoDate = document.getElementById('todo-date');
+    
+     if (todoInput.value === '' || todoDate.value === '') {
+        alert('mohon untuk diisi');
+} else {
+    
+    todos.push({ text: todoInput.value, date: todoDate.value });
+    todoInput.value = '';
+    todoDate.value = '';
+
+    renderTodos();
+}
+    }
+function renderTodos() {
+    const todoList = document.getElementById('todo-list');
+    
+    if (todos.length === 0) {
+        todoList.innerHTML = '<li>no todos</li>';
+        return;
+    }
+    todoList.innerHTML = '';
+    
+    todos.forEach((todo, _) => {
+        todoList.innerHTML += `
+        <li>
+            <p class="text-2x1">${todo.text} <span class="text-sm text-gray-500">${todo.date}</span></p>
+            <hr />
+        </li>`;
+    });
+}
+    
+function clearTodos() {
+    todos = [];
+    renderTodos(); 
+}
+
+
+function filterTodos() {}
+    </script>
+</body>
+</html>
